@@ -1,0 +1,94 @@
+{% extends "shop/../account/base.html" %}
+{% load static %}
+{% block title %}
+MY CART
+{% endblock title %}
+<link rel="stylesheet" href="{% static 'shop/css/login.css' %}">
+{% block content %}
+
+<!-- Page Add Section Begin -->
+<section class="page-add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="page-breadcrumb">
+                    <h2>Order Sheet<span>.</span></h2>
+
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <img src="{% static 'shop/images/add.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page Add Section End -->
+
+          
+<!-- Cart Page Section Begin -->
+<form action="" method="post">
+    
+    {% csrf_token %}
+<div class="cart-page">
+    <div class="container">
+        <div class="cart-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="product-h">주문자</th>
+                        <th class="product-h"><input name="name"></th>               
+                    </tr>
+                </thead>
+                
+                
+                <thead>
+                    <tr>
+                        <th class="product-h">배송지</th>
+                        <th class="product-h"><input name="home"></th>               
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th class="product-h">연락처</th>
+                        <th class="product-h"><input name="phone"></th>               
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th class="product-h">결제금액</th>
+                        <th class="product-h" name="amount">{{ total_price }}</th>               
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <th class="product-h">구매상품</th>
+                        <th class="product-h"></th>
+                    </tr>
+                    {% for product in cart %}
+                    <tr>
+                        <th class="product-h"></th>
+                        <th class="product-h" name="products">{{ product.products.name }},      {{ product.quantity }}개</th>
+                                       
+                    </tr>
+                    {% endfor %}
+                </thead>
+                
+            </table>
+            <button>
+                
+                <a onclick="alert('성공적으로 주문되었습니다.');" style="cursor:pointer">
+                    <input type="submit" class="primary-btn chechout-btn" value="구매">
+                </a> 
+            </button>
+        </div>
+
+    </div>
+    
+</div>
+</form>
+</div>
+<!-- Cart Page Section End -->
+
+
+{% endblock content %}

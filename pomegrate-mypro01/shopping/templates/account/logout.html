@@ -1,0 +1,16 @@
+{% extends "shop/../account/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <div class="alert alert-primary" role="alert">
+            로그아웃 되었습니다.
+        </div>
+        <a href="{% url 'shopping:login' %}" class="btn btn-out-outline-success">login 하기</a>
+    </div>
+    <div class="col"></div>
+</div>
+
+{% endblock%}

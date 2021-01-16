@@ -1,0 +1,103 @@
+{% extends "shop/../account/base.html" %}
+
+{% block title %}
+DETAIL
+{% endblock title %}
+{% load static %}
+{% block content %}
+<!-- Page Add Section Begin -->
+<section class="page-add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="page-breadcrumb">
+                    <h2>{{category.sort}}<span>.</span></h2>
+                    <a href="{% url 'shopping:index' %}">Home</a>
+                    <a href="#">{{category.sort}}</a>
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <img src="{% static 'shop/images/add.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page Add Section End -->
+
+<!-- Product Page Section Beign -->
+<section class="product-page">
+    <div class="container">
+        <div class="product-control">
+            <a href="#">Previous</a>
+            <a href="#">Next</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-slider owl-carousel">
+                    <div class="product-img">
+                        <figure>
+                            <img src="{{ product.image.url }}" alt="">
+                            <div class="p-status">new</div>
+                        </figure>
+                    </div>
+                    <div class="product-img">
+                        <figure>
+                            <img src="{{ product.image.url }}" alt="">
+                            <div class="p-status">new</div>
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="product-content">
+                    <h2>{{ product.name }}</h2>
+                    <div class="pc-meta">
+                        <h5>{{ product.price}}원</h5>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <p>상품설명란입니다.</p>
+                    <ul class="tags">
+                        <li><span>Category :</span> {{product.category}}</li>
+                        <li><span>Tags :</span> man, shirt, dotted, elegant, cool</li>
+                    </ul>
+                    {% csrf_token %}
+                    <form action="{% url 'shopping:cart_or_buy' product.pk %}" , method="POST">
+                        {% if product.quantity > 0 %}
+                        <div class="product-quantity">
+                            <div class="pro-qty">
+                                <input type="text" value="1" name="quantity">
+                            </div>
+                        </div>
+                        {% else %}
+                        <a href="#" class="primary-btn pc-btn">SOLD OUT</a>
+                        {% endif %}
+                        <button class="primary-btn pc-btn" type="submit" name="add_cart" value="add_cart">Add to
+                            cart</button>
+                        {% csrf_token %}
+                    </form>
+                    <ul class="p-info">
+                        <li>Product Information</li>
+                        <li>Reviews</li>
+                        <li>Product Care</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Page Section End -->
+
+
+<div>
+  ---------------------------------------------------------------------------------------------------------
+</div>
+{% endblock content %}

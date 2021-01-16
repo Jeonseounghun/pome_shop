@@ -1,0 +1,21 @@
+
+{% extends "shop/../account/base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <form action="" method="POST">
+            <div class="alert alert-info">Please enter your account information</div>
+            {% csrf_token %}
+            <label>Username : <input type="text", name="username"></label></br>
+            <label>Password : <input type="text", name="password1"></label></br>
+            <label>Repeat password : <input type="text", name="password2"></label></br>
+            
+        <input type="submit" value="Sign Up" class="btn btn-outline-info">
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
+{% endblock %}

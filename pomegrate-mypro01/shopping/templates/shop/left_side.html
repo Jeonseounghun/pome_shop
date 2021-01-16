@@ -1,0 +1,60 @@
+{% load static%}
+
+
+
+<div class="side-top">
+    <div class="account">
+        <nav class="navbar navbar-light bg-light">
+            {% if user.is_active %}
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'shopping:logout' %}">LOGOUT</a>
+            </div>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'shopping:profile' user.pk %}">MY PAGE</a>
+            </div>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'shopping:cart' user.pk %}">CART</a>
+            </div>
+
+            {% else %}
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'shopping:login' %}">LOGIN</a>
+            </div>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'shopping:signup' %}">SIGN UP</a>
+            </div>
+
+            {% endif %}
+        </nav>
+    </div>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'shopping:notice' %}">NOTICE</a>
+        </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Q&A</a>
+        </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">REVIEW</a>
+        </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">입고지연</a>
+        </div>
+
+    </nav>
+
+</div>
+
+<div class="side-category">
+    <nav class="navbar navbar-light bg-light">
+        {% for category in categories %}
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'shopping:show_category' category.pk %}">{{ category.sort }}</a>
+        </div>
+        {% endfor %}
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SALE</a>
+        </div>
+    </nav>
+</div>
+

@@ -1,0 +1,78 @@
+
+{% extends "shop/../account/base.html" %}
+{% load static %}
+{% block title %}
+    {{ category }}
+{% endblock title %}
+
+{% block content %}
+
+    <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>{{category.sort}}<span>.</span></h2>
+                        <a href="{% url 'shopping:index' %}">Home</a>
+                        <a href="#">{{category.sort}}</a>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <img src="{% static 'shop/images/add.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+
+    <!-- Categories Page Section Begin -->
+    <section class="categories-page spad">
+        <div class="container">
+            <div class="categories-controls">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="categories-filter">
+                            <div class="cf-left">
+                                <form action="#">
+                                    <select class="sort">
+                                        <option value="">Sort by</option>
+                                        <option value="">Orders</option>
+                                        <option value="">Newest</option>
+                                        <option value="">Price</option>
+                                    </select>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                {% for product in products %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product-item">
+                        <div class="product-text">
+                            <a href="{% url 'shopping:product_detail' product.id %}">
+                                <img src="{{ product.image.url }}" alt="" >
+                            </a>                            
+                            <p>5th Market</p>
+                            
+                        </div>
+                        <div class="product-text">
+                            <a href="{% url 'shopping:product_detail' product.id %}">
+                                <p>{{ product.name }}</p>
+                            </a>
+                            <p>{{ product.price }}원</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            
+        </div>
+    </section>
+    <!-- Categories Page Section End -->
+{% endblock content %}
