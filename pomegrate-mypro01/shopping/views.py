@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
-from .models import Product, Post, Point, Order, Category, Cart
+from .models import Product, Post, Point, Order, Category, Cart, Image
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -38,7 +38,9 @@ def index(request):
 def profile(request, pk):
     user = User.objects.get(pk=pk)
     categories = Category.objects.all()
-    context = {"user": user, "categories":  categories}
+    orders = Order.objects.filter(user=user)
+    
+    context = {"user": user, "categories":  categories, 'orders':orders}
     return render(request, 'shop/profile.html', context)
 
 def notice(request):
@@ -71,7 +73,7 @@ def order_list(request, pk):
             total_price += product.products.price
     cart_product = ""
     for product in cart:
-        cart_product += product.products.name
+        cart_product += "상품명 : " + product.products.name + "/ 갯수 : " +  str(product.quantity) + "\n"
      
     if request.method == 'POST':
         info = Order()
@@ -80,6 +82,7 @@ def order_list(request, pk):
         info.amount = total_price
         info.home = request.POST.get('home')
         info.phone = request.POST.get('phone')
+        info.order_requset = request.POST.get('order_requset')
         
         info.products = cart_product
         info.save()
@@ -87,6 +90,15 @@ def order_list(request, pk):
     
     context = {'user': user,  'categories': categories, 'total_price':total_price, 'cart':cart,}
     return render(request, 'shop/order_list.html', context)
+
+def order_info(request, order_id):
+    categories = Category.objects.all()
+    order = Order.objects.all()
+    order_info = Order.objects.get(pk=order_id)
+    
+    
+    context = {  'categories': categories, 'order':order, 'order_info':order_info}
+    return render(request, 'shop/order_info.html', context)
 
 def show_category(request, category_id):
     categories = Category.objects.all()
@@ -109,11 +121,10 @@ def product_detail(request, pk):
     product = Product.objects.get(pk=pk)
     category = Category.objects.get(pk=product.category.pk)
     Product.objects.filter(pk=pk).update(hit=product.hit+1)
+    images = Image.objects.filter(products=product)
     point = int(product.price * 0.01)
-    quantity_list = []
-    for i in range(1, product.quantity) :
-        quantity_list.append(i)
-    context = {"quantity_list": quantity_list, "product": product, "point": point, "category": category, "categories": categories}
+    
+    context = { "product": product, "point": point, "category": category, "categories": categories, 'images':images}
     return render(request, 'shop/detail.html', context)
 
 
@@ -127,13 +138,14 @@ def cart(request, pk):
             total_price += product.products.price
     paginator = Paginator(cart, 10)
     page = request.GET.get('page')
+    total_price2 = total_price + 3000
     try:
         cart = paginator.page(page)
     except PageNotAnInteger:
         cart = paginator.page(1)
     except EmptyPage:
         cart = paginator.page(paginator.num_pages)
-    context = {'user': user, 'cart': cart, 'categories': categories, 'total_price':total_price, }
+    context = {'user': user, 'cart': cart, 'categories': categories, 'total_price':total_price, 'total_price2':total_price2, }
     return render(request, 'shop/cart.html', context)
 
 def delete_cart(request, pk):

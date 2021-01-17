@@ -25,67 +25,82 @@ MY CART
 </section>
 <!-- Page Add Section End -->
 
-          
+
 <!-- Cart Page Section Begin -->
 <form action="" method="post">
-    
+
     {% csrf_token %}
-<div class="cart-page">
-    <div class="container">
-        <div class="cart-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="product-h">주문자</th>
-                        <th class="product-h"><input name="name"></th>               
-                    </tr>
-                </thead>
-                
-                
-                <thead>
-                    <tr>
-                        <th class="product-h">배송지</th>
-                        <th class="product-h"><input name="home"></th>               
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th class="product-h">연락처</th>
-                        <th class="product-h"><input name="phone"></th>               
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th class="product-h">결제금액</th>
-                        <th class="product-h" name="amount">{{ total_price }}</th>               
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <th class="product-h">구매상품</th>
-                        <th class="product-h"></th>
-                    </tr>
-                    {% for product in cart %}
-                    <tr>
-                        <th class="product-h"></th>
-                        <th class="product-h" name="products">{{ product.products.name }},      {{ product.quantity }}개</th>
-                                       
-                    </tr>
-                    {% endfor %}
-                </thead>
-                
-            </table>
-            <button>
-                
-                <a onclick="alert('성공적으로 주문되었습니다.');" style="cursor:pointer">
-                    <input type="submit" class="primary-btn chechout-btn" value="구매">
-                </a> 
-            </button>
+    <div class="cart-page">
+        <div class="container">
+            <div class="cart-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="product-h">주문자</th>
+                            <th class="product-h"><input name="name"></th>
+                        </tr>
+                    </thead>
+
+
+                    <thead>
+                        <tr>
+                            <th class="product-h">배송지</th>
+                            <th class="product-h"><input name="home"></th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">연락처</th>
+                            <th class="product-h"><input name="phone"></th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">결제금액</th>
+                            <th class="product-h" name="amount">{{ total_price }}</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">구매상품</th>
+                            <th class="product-h">"장바구니에 담겨있는 상품입니다."</th>
+                        </tr>
+                        {% for product in cart %}
+                        <tr>
+                            <th class="product-h"></th>
+                            <th class="product-h" name="products">{{ product.products.name }}, {{ product.quantity }}개
+                            </th>
+
+                        </tr>
+                        {% endfor %}
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">주문시 요청사항</th>
+                            <th class="product-h" name="amount"><input name="order_requset"></th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h"></th>
+
+                            <th class="product-h">
+                                <button class="primary-btn3" value="구매하기" onclick="alert('성공적으로 주문되었습니다.');" style="cursor:pointer">
+
+                                구매하기
+                                </button>
+                                
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+
         </div>
 
     </div>
-    
-</div>
 </form>
 </div>
 <!-- Cart Page Section End -->

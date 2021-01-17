@@ -1,0 +1,103 @@
+{% extends "shop/../account/base.html" %}
+{% load static %}
+{% block title %}
+MY CART
+{% endblock title %}
+<link rel="stylesheet" href="{% static 'shop/css/login.css' %}">
+{% block content %}
+
+<!-- Page Add Section Begin -->
+<section class="page-add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="page-breadcrumb">
+                    <h2>Order Sheet<span>.</span></h2>
+
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <img src="{% static 'shop/images/add.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page Add Section End -->
+
+
+<!-- Cart Page Section Begin -->
+<form action="" method="post">
+
+    {% csrf_token %}
+    <div class="cart-page">
+        <div class="container">
+            <div class="cart-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="product-h">주문자</th>
+                            <th class="product-h">{{ order_info.name }}</th>
+                        </tr>
+                    </thead>
+
+
+                    <thead>
+                        <tr>
+                            <th class="product-h">배송지</th>
+                            <th class="product-h">{{ order_info.home }}</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">연락처</th>
+                            <th class="product-h">{{ order_info.phone }}</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">결제금액</th>
+                            <th class="product-h" name="amount">{{ order_info.amount }}</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">구매상품</th>
+                            <th class="product-h">{{ order_info.products }}</th>
+                        </tr>
+                        
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">주문시 요청사항</th>
+                            <th class="product-h">{{ order_info.order_requset }}</th>
+                        </tr>
+                        
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="product-h">입급확인여부</th>
+
+                            <th class="product-h">
+                                {% if order_info.quantity == 1 %}
+                                입금미확인
+                                {% else %}
+                                입금확인
+                                {% endif %}
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+</div>
+<!-- Cart Page Section End -->
+
+
+{% endblock content %}

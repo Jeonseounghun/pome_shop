@@ -28,10 +28,7 @@ DETAIL
 <!-- Product Page Section Beign -->
 <section class="product-page">
     <div class="container">
-        <div class="product-control">
-            <a href="#">Previous</a>
-            <a href="#">Next</a>
-        </div>
+        
         <div class="row">
             <div class="col-lg-6">
                 <div class="product-slider owl-carousel">
@@ -41,12 +38,7 @@ DETAIL
                             <div class="p-status">new</div>
                         </figure>
                     </div>
-                    <div class="product-img">
-                        <figure>
-                            <img src="{{ product.image.url }}" alt="">
-                            <div class="p-status">new</div>
-                        </figure>
-                    </div>
+                    
                 </div>
 
             </div>
@@ -64,13 +56,15 @@ DETAIL
                             <i class="fa fa-star"></i>
                         </div>
                     </div>
-                    <p>상품설명란입니다.</p>
+                    <p>{{ product.description}}</p>
                     <ul class="tags">
                         <li><span>Category :</span> {{product.category}}</li>
-                        <li><span>Tags :</span> man, shirt, dotted, elegant, cool</li>
+                        <li><span>Color :</span> {{ product.color }}</li>
+                        <li><span>Size :</span> {{ product.size }}</li>
                     </ul>
                     {% csrf_token %}
                     <form action="{% url 'shopping:cart_or_buy' product.pk %}" , method="POST">
+                        {% if user.is_authenticated %}
                         {% if product.quantity > 0 %}
                         <div class="product-quantity">
                             <div class="pro-qty">
@@ -80,24 +74,36 @@ DETAIL
                         {% else %}
                         <a href="#" class="primary-btn pc-btn">SOLD OUT</a>
                         {% endif %}
+                        
                         <button class="primary-btn pc-btn" type="submit" name="add_cart" value="add_cart">Add to
                             cart</button>
+                        {%else%}
+                        {%endif%}
                         {% csrf_token %}
                     </form>
-                    <ul class="p-info">
-                        <li>Product Information</li>
-                        <li>Reviews</li>
-                        <li>Product Care</li>
-                    </ul>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+{% load disqus_tags %}
+<section class="product-page">
+    <div class="container">
+        {% disqus_show_comments %}
+    </div>
+</section>
+<section class="product-page">
+    {% for a in images %}
+    <div class="container">
+        <div class="detail_img">
+        <img class="detail_img" src="{{ a.image.url }}" alt="">
+    </div>
+    </div>
+    {% endfor %}
+</section>
 <!-- Product Page Section End -->
 
 
-<div>
-  ---------------------------------------------------------------------------------------------------------
-</div>
+
 {% endblock content %}

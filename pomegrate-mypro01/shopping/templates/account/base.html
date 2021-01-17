@@ -50,18 +50,7 @@
                 <div class="logo">
                     <a href="{% url 'shopping:index' %}"><img src="{% static 'shop/images/logo.png' %}" alt=""></a>
                 </div>
-                <div class="header-right">
-                    <img src="{% static 'shop/images/search.png' %}" alt="" class="search-trigger">
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'shopping:profile' user.pk %}">
-                        <img src="{% static 'shop/images/man.png' %}" alt="">
-                    </a>
-                    {% endif %}
-                    <a href="#">
-                        <img src="{% static 'shop/images/bag.png' %}" alt="">
-                        <span>2</span>
-                    </a>
-                </div>
+                
                 <div class="user-access">
                     {% if user.is_authenticated %}
                     <a href="{% url 'shopping:logout' %}">Logout</a>
@@ -73,18 +62,21 @@
                 <nav class="main-menu mobile-menu">
                     <ul>
                         <li><a class="active" href="{% url 'shopping:index' %}">Home</a></li>
-                        
-                        
-                        <li><a href="#">Shop</a>
+
+
+                        <li><a href="{% url 'shopping:show_category' 1 %}">Shop</a>
                             <ul class="sub-menu">
-                                
+
                                 {% for category in categories %}
-                                <li><a href="{% url 'shopping:show_category' category.pk %}">{{ category.sort }}</a></li>
+                                <li><a href="{% url 'shopping:show_category' category.pk %}">{{ category.sort }}</a>
+                                </li>
                                 {% endfor %}
                             </ul>
                         </li>
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'shopping:cart' user.pk %}">Cart</a></li>
+                        <li><a href="{% url 'shopping:order_list' user.pk %}">Order</a></li>
+                        <li><a href="{% url 'shopping:profile' user.pk %}">My Page</a></li>
                         {% endif %}
                         <li><a href="https://m.blog.naver.com/PostList.nhn?blogId=pomegranate_closet">Blog</a></li>
                         <li><a href="https://www.instagram.com/pomegranate.closet/">Instagram</a></li>

@@ -152,15 +152,60 @@ ol {
 
 /* buttons */
 
+A:link {
+	text-decoration: none;
+	color: black;
+}
+A:visited {
+	text-decoration: none;
+	color: black;
+}
+
+A:hover {
+	text-decoration: none;
+	color: black;
+}
+.detail_img {
+	max-width: 500;
+	min-width: 100;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-right: 20%;
+	margin-left: 10%;
+
+}
+.container3 {
+
+	width: 100%;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	padding-right: 0%;
+	padding-left: 5%;
+	margin-right: auto;
+	margin-left: auto;
+
+}
 .primary-btn {
-	color: #fff;
+	
 	display: inline-block;
 	font-size: 14px;
 	font-weight: 600;
 	padding: 16px 40px;
-	border: 2px solid #fff;
-	border-radius: 50px;
+	border: 1px solid black;
+	border-radius: 30px;
 	text-transform: uppercase;
+}
+
+.primary-btn3 {
+	
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 16px 40px;
+	border: 1px solid black;
+	border-radius: 30px;
+	text-transform: uppercase;
+	margin: 0 auto;
 }
 
 .primary-btn2 {
@@ -1498,6 +1543,10 @@ ol {
 
 .cart-table table .product-col img {
 	max-width: 168px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .cart-table table .product-col .p-title {
@@ -1715,6 +1764,7 @@ ol {
 .total-info .total-table table thead {
 	border-top: 2px solid #D0D7DB;
 	border-bottom: 2px solid #D0D7DB;
+	text-align: center;
 }
 
 .total-info table tr th {
@@ -1722,6 +1772,10 @@ ol {
 	font-size: 12px;
 	font-weight: 500;
 	padding: 16px 0;
+	
+}
+th {
+    text-align: center;
 }
 
 .total-info table tr td {
@@ -1729,6 +1783,7 @@ ol {
 	font-size: 18px;
 	font-weight: 600;
 	padding-top: 22px;
+	text-align: center;
 }
 
 .total-info table tr .total {
@@ -1998,6 +2053,13 @@ ol {
 	padding-bottom: 94px;
 }
 
+.container2 {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 .contact-form input {
 	width: 100%;
 	font-size: 12px;
